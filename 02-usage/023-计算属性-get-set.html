@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>022-计算属性的使用.html</title>
+    <title>023-计算属性-get-set.html</title>
 </head>
 <body>
     <div id="app">
+        <input type="text" v-model="fullName" >
         <p>firstName:{{firstName}}</p>
         <p>lastName:{{lastName}}</p>
-        <p>fullName:{{getFullName()}}</p>
         <p>fullName:{{fullName}}</p>
     </div>
 
@@ -21,14 +21,20 @@
             firstName:"wang",
             lastName:"kk",
         },
-        methods:{//方法主要做业务逻辑处理
-            getFullName(){
+        methods:{},
+        computed:{
+            /*fullName(){
                 return this.firstName + ' ' + this.lastName
-            }
-        },
-        computed:{//计算属性
-            fullName(){
-                return this.firstName + ' ' + this.lastName
+            }*/
+            fullName:{
+                get(){
+                    return this.firstName + ' ' + this.lastName
+                },
+                set(newValue){
+                    var names = newValue.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[names.length - 1]
+                }
             }
         }
 
